@@ -186,7 +186,7 @@ docker run -p 8081:8081 --name mongoexpress -e ME_CONFIG_MONGODB_ADMINUSERNAME=r
 ---
 ### docker compose
 - tool for running multiple containers simpler than using commands. In other words, its a structured way for running multiple containers instead of using docker commands, easier to mantain/edit
-- e.g. [mongo docker compose yml](https://github.com/paguerre3/dockerops/blob/main/mongo.yml)
+- e.g. [mongo docker compose yml](https://github.com/paguerre3/dockerops/blob/master/mongo.yml)
 
 **NOTE**
 > Docker Compose takes care of creating a docker network automatically! i.e. there is no need of creating a common network manually. Docker compose file example doesn't contain one. Docker Compose is already installed with Docker
@@ -223,7 +223,7 @@ Removing network dockerops_default</code></pre>
 
 **NOTE**
 > built artifact is the pre-requisite, i.e. <code>./gradlew bootJar</code> already done. The mentioned step is normally done by the CI when building the custom java application using gradle wrapper therefore the next step of the pipeline will be building the image based on the dockerfile taking into account that the artifact was built successfully
-- e.g. [Dockerfile of custom java application/service](https://github.com/paguerre3/dockerops/blob/main/Dockerfile)
+- e.g. [Dockerfile of custom java application/service](https://github.com/paguerre3/dockerops/blob/master/Dockerfile)
 - command for building an image is <code>build -t {app-name:version/-tag} {location of Dockerfile}</code>, e.g. Dockerfile in current directoy:<pre><code>docker build -t dockeropsvc:1.0 .</code></pre> 
 - check images created or pulled:<pre><code>docker images
 REPOSITORY      TAG          IMAGE ID       CREATED         SIZE
@@ -315,7 +315,7 @@ hello-world                                                latest       bf756fb1
 - dependency images as mongo/mongo-express from public registry, i.e. dockerhub
 - deploy multiple containers
 - deployment server
-- e.g. [complete docker compose file yml](https://github.com/paguerre3/dockerops/blob/main/complete.yml)
+- e.g. [complete docker compose file yml](https://github.com/paguerre3/dockerops/blob/master/complete.yml)
 
 **NOTE**
 > user must be logged into aws for pulling the private image as pre-requisite, i.e. step1 of the push command section can be reused.
@@ -336,7 +336,7 @@ Starting mongodb          ... done</code></pre>
 - as mentioned, a container runs under a host that has docker runtime. The container has its own virtualized file system so the data is gone when restarting or removing the container if there is no volume mounted from host
 - the way a Docker Volume works is that a Folder in physical host file system is mounted into the virtual file system of Docker, e.g. host-file-system(physical)=/home/mount/data is attached to container-file-system(virtual)=/var/lib/postgresql/data. When the container writes its data into the virtual file system it gets replicated into the physical host file system        
 - 3 volume types: 1. host=you decide where on the host file system the reference is made, e.g. <code>docker run -v /home/mount/data:/var/lib/postgresql/data</code>. 2. anonymous=no host file system reference is specified so Docker takes care of this, i.e. for each container a folder is auto-generated in host and then mounted, e.g. <code>docker run -v /var/lib/postgresql/data</code> is referenced by Docker to /var/lib/docker/volumes/random-hash/_data in the host. 3. named-volume=its an improvement of the previous type where you can reference the volume by a name, e.g.  <code>docker run -v name:/var/lib/postgresql/data</code>. Named voumes are normally used in production as they are simpler to manage, e.g. the same host location reference&data can be shared by "name" among different containers if set under a common section of the docker compose file as the example bellow
-- e.g. [complete docker compose file yml with docker volume type named](https://github.com/paguerre3/dockerops/blob/main/complete-v.yml)
+- e.g. [complete docker compose file yml with docker volume type named](https://github.com/paguerre3/dockerops/blob/master/complete-v.yml)
 
 **NOTE**
 > virtual file system path differs from each data base, e.g. mongo=/data/db, mysql=/var/lib/mysql, postgres=/var/lib/postgresql/data
