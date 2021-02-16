@@ -49,7 +49,7 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS   
 ### docker vs virtual machine  
 OOSS have two layers1=os kernel, layer2=applications (top layer), e.g. linux distros use the "same" linux kernel but have implemented different applications on top
 
-<img src="https://github.com/paguerre3/dockerops/blob/main/os-layers.PNG" width="48%" height="30%">
+<img src="https://github.com/paguerre3/dockerops/blob/master/os-layers.PNG" width="48%" height="30%">
 
 **NOTE**
 > layer0=hardware (bottom layer)
@@ -59,7 +59,7 @@ OOSS have two layers1=os kernel, layer2=applications (top layer), e.g. linux dis
 - docker containers run faster because they run on top of the existent os kernel
 - a virtual machine is more portable and in terms of compatibily is considered better as it can be ran above different OOSS like windows
 - docker runs on top of the os kernel therefore is less portable and in terms of compatibility it can't be run above certain windows versions (lower than 10) because most docker images are based on lightweight linux application layers e.g. alpine distro not compatible with lower versions of windows. As workaround docker desktop supports hyper-v, linux as subsystem of windows and virtual machine platform
-<img src="https://github.com/paguerre3/dockerops/blob/main/docker-vs-vm.PNG" width="48%" height="30%">
+<img src="https://github.com/paguerre3/dockerops/blob/master/docker-vs-vm.PNG" width="48%" height="30%">
 
 **NOTE**
 > virtualization must be enabled in windows bios, if not, enter bios and enable it
