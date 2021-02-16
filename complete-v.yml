@@ -1,0 +1,39 @@
+version: '3.3'
+services:
+  mongodb:
+    # container name
+    container_name: mongodb
+    # container image:version/-tag
+    image: mongo
+    # host:container ports binded
+    ports:
+      - 6003:27017
+    # /data/db is where mongo stores data in the container
+    volumes:
+      - mongodata:/data/db
+    # environment variables
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+  mongoexpress:
+    container_name: mongoexpress
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=pass
+  dockeropsvc:
+    container_name: dockeropsvc_priv
+    # as image comes from aws ecr private repository then registryDomain is specified
+    image: 385021697482.dkr.ecr.sa-east-1.amazonaws.com/dockeropsvc:1.0
+    ports:
+      - 8080:8080
+    environment:
+      - "JAVA_OPTS=-Dspring.data.mongodb.uri=mongodb://root:pass@mongodb/employeedb?authSource=admin"
+# named volumes can share the same data among different containers
+volumes:
+  mongodata:
+    # local driver stores data in physical file system of host
+    driver: local
